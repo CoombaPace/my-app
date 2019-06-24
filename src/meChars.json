@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "name": "Urdnot Wrex",
+    "image": "./images/Wrex.png",
+    "clicked": false
+  },
+  {
+    "id": 2,
+    "name": "Garrus",
+    "image": "./images/Garrus.png",
+    "clicked": false
+  },
+  {
+    "id": 3,
+    "name": "Saren",
+    "image": "./images/Saren.png",
+    "clicked": false
+  },
+  {
+    "id": 4,
+    "name": "Ochren",
+    "image": "./images/Ochren.png",
+    "clicked": false
+  },
+  {
+    "id": 5,
+    "name": "Liara",
+    "image": "./images/Liara.png",
+    "clicked": false
+  },
+  {
+    "id": 6,
+    "name": "Tali",
+    "image": "./images/Tali.png",
+    "clicked": false
+  },
+  {
+    "id": 7,
+    "name": "Balak",
+    "image": "./images/Balak.png",
+    "clicked": false
+  },
+  {
+    "id": 8,
+    "name": "Vidinos",
+    "image": "./images/Vidinos.png",
+    "clicked": false
+  },
+  {
+    "id": 9,
+    "name": "Udina",
+    "image": "./images/Udina.png",
+    "clicked": false
+  },
+  {
+    "id": 10,
+    "name": "Kate",
+    "image": "./images/Kate.png",
+    "clicked": false
+  },
+  {
+    "id": 11,
+    "name": "Anderson",
+    "image": "./images/Anderson.png",
+    "clicked": false
+  },
+  {
+    "id": 12,
+    "name": "Chakwas",
+    "image": "./images/Chakwas.png",
+    "clicked": false
+  }
+]

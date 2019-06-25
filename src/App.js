@@ -1,83 +1,85 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import './App.css';
 import Wrapper from "./components/Wrapper";
-
-import meChar from "./meChars.json";
+import meChars from "./meChars.json";
 import CharCard from "./components/CharCard/CharCard.js";
+
+let topScore = 0;
+let guessesCorrect = 0;
+// let hearts = 0;
+let message = "";
+let cardClicked = false;
 
 //sets state for our components
 class App extends Component {
   state = {
-      meChar,
-      clicked: [],
-      score: 0,
-      topScore: 0
-  };
+		meChars,
+		topScore,
+		guessesCorrect,
+    message,
+    cardClicked, 
+		// hearts
+	};
 
-  updateTopScore = () => {
-        console.log(this.state.score)
-        console.log(this.state.topScore)
-      if (this.state.score > this.state.topScore) {
-          this.setState({ topScore: this.state.score });
-          console.log(this)
-      }
-  };
+	setClicked = id => {
+		const meChars = this.state.meChars;
+		const cardClicked = meChars.filter(meChar => meChar.id === id);
 
-  //when you click on a player get the current player and remove them from the array
-  imageClick = e => {
-    const currentChar = e.target.alt;
-    const pickedChar = this.state.clickedChar.indexOf(currentChar) > -1;
+		if (cardClicked[0].clicked) {
 
-    //if you click on a player that has already been clicked, reset the game and shuffle players
-    if (pickedChar) {
-        this.setState({
-            meChar: this.state.meChar.sort(function (a, b) {
-                return 0.5 - Math.random();
-            }),
-            clickedChar: [],
-            score: 0
-        });
-        alert("You already clicked this player! You lose. Try again!");
-        this.updateTopScore();
+			guessesCorrect = 0;
+			message = 'Whoops. Start over';
 
-        //if you click on an available player, your score is increased and players are shuffled
-    } else {
-        this.setState(
-            {
-                meChar: this.state.meChar.sort(function (a, b) {
-                    return 0.5 - Math.random();
-                }),
-                clickedChar: this.state.clickedChar.concat(
-                    currentChar
-                ),
-                score: this.state.score + 1
-            },
-            //When user correctly clicks all 12 players their score is increased and the players are shuffled     
-            () => {
-                if (this.state.score === 12) {
-                    alert("Congrats! You Win! You are a super fan!");
-                    this.updateTopScore();
-                    this.setState({
-                        meChar: this.state.meChar.sort(function (a, b) {
-                            return 0.5 - Math.random();
-                        }),
-                        clickedChar: [],
-                        score: 0
-                    });
-                }
-            }
-        );
-    }
-};
+			// change to map or smth?
+			for (let i = 0; i < meChars.length; i++) {
+				meChars[i].clicked = false;
+			}
+
+			this.setState({message});
+			this.setState({guessesCorrect});
+			this.setState({meChars});
+
+		} else {
+			cardClicked[0].clicked = true;
+
+			guessesCorrect = guessesCorrect + 4;
+			message = "Good Job!"
+
+			if (guessesCorrect > topScore) {
+				topScore = guessesCorrect;
+				// hearts++;
+				// this.setState({hearts});
+				this.setState({topScore});
+				// this.renderHearts();
+			}
+
+			meChars.sort((a, b) => {
+				return 0.5 - Math.random();
+			});
+
+			this.setState({meChars});
+			this.setState({guessesCorrect});
+			this.setState({message});
+		}
+	};
+
+	// renderHearts() {
+	// 	let divs = [];
+
+	// 	for (let i = 0; i < this.state.hearts; i++) {
+	// 		divs.push(<div key={i} className="heart"></div>);
+	// 	}
+
+	// 	return <div>{divs}</div>;
+	// };
 
   // Map over this.state.meChars and render a FriendCard component for each friend object
   render() {
     return (
       <Wrapper>
-        {this.state.meChar.map(meChar => (
+        {this.state.meChars.map(meChar => (
           <CharCard
-            imageClick={this.imageClick}
+            setClicked={this.setClicked}
             id={meChar.id}
             key={meChar.id}
             image={meChar.image}

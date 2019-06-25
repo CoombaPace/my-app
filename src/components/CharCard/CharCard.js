@@ -26,7 +26,9 @@ function MediaCard(props) {
   const {classes} = props;
 
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card}
+    onClick={() => props.setClicked(props.id)}
+    >
         <CardMedia
           className={classes.media}
           image={props.image} alt={props.name}
